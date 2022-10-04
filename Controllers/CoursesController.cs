@@ -28,18 +28,18 @@ namespace TugasBootcampNET.Controllers
             return lstCourseGetDto;
         }
 
-        [HttpGet("{id}")] //GetById
-        public CourseGetDTO Get(int id)
+        [HttpGet("{CourseID}")] //GetById
+        public CourseGetDTO Get(int CourseID)
         {
-            var result = _course.GetById(id);
+            var result = _course.GetById(CourseID);
             var courseGetDto = _mapper.Map<CourseGetDTO>(result);
             return courseGetDto;
         }
 
-        [HttpGet("{Title}")] //GetByName
-        public IEnumerable<CourseGetDTO> GetByName(string name)
+        [HttpGet("Title")] //GetByName
+        public IEnumerable<CourseGetDTO> GetByName(string Title)
         {
-            var results = _course.GetByName(name);
+            var results = _course.GetByName(Title);
             var listCourseGetDTO = _mapper.Map<IEnumerable<CourseGetDTO>>(results);
             return listCourseGetDTO;
         }
