@@ -68,7 +68,8 @@ namespace TugasBootcampNET.Controllers
                 var course = new Course
                 {
                     CourseID = id,
-                    Title = courseDTO.Title
+                    Title = courseDTO.Title,
+                    Credits = courseDTO.Credits
                 };
                 var editcourse = _course.Update(course);
                 var courseGetDTO = _mapper.Map<CourseGetDTO>(editcourse);
