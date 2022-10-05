@@ -10,6 +10,8 @@ namespace TugasBootcampNET.Profiles
         {
             CreateMap<CourseAddDTO, Course>();
             CreateMap<Course, CourseGetDTO>();
+            CreateMap<StudentAddDTO, Student>();
+            CreateMap<Student, StudentGetDTO>();
         }
 
     }

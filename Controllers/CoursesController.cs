@@ -81,13 +81,13 @@ namespace TugasBootcampNET.Controllers
             }
         }
 
-        [HttpDelete("{id}")] //Delete
-        public IActionResult Delete(int id)
+        [HttpDelete("{CourseID}")] //Delete
+        public IActionResult Delete(int CourseID)
         {
             try
             {
-                _course.Delete(id);
-                return Ok($"Delete course id {id} berhasil");
+                _course.Delete(CourseID);
+                return Ok($"Delete course id {CourseID} berhasil");
             }
             catch (Exception ex)
             {
