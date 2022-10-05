@@ -20,6 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
 //DI
 builder.Services.AddScoped<ICourse, CourseEF>();
 builder.Services.AddScoped<IStudent, StudentEF>();
+builder.Services.AddScoped<IEnrollment, EnrollmentEF>();
 
 var app = builder.Build();
 
