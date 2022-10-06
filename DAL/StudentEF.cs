@@ -1,4 +1,5 @@
-﻿using TugasBootcampNET.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TugasBootcampNET.Models;
 
 namespace TugasBootcampNET.DAL
 {
@@ -9,6 +10,20 @@ namespace TugasBootcampNET.DAL
         public StudentEF(AppDbContext context)
         {
             _context = context;
+        }
+
+        public IEnumerable<Student> AllStudentWithChosenCourse(int CourseID)
+        {
+            var students = _context.Students
+                .FromSqlInterpolated($"exec dbo.AllStudentWithChosenCourse {CourseID}").ToList();
+            return students;
+        }
+
+        public IEnumerable<Student> AllStudentWithCourse()
+        {
+            var students = _context.Students
+                .FromSqlInterpolated($"exec dbo.AllStudentWithCourse").ToList();
+            return students;
         }
 
         public void Delete(int id)

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using TugasBootcampNET.DAL;
 using TugasBootcampNET.DTO;
 using TugasBootcampNET.Models;
@@ -29,9 +30,9 @@ namespace TugasBootcampNET.Controllers
         }
 
         [HttpGet("{EnrollmentID}")] //GetById
-        public EnrollmentGetDTO Get(int ID)
+        public EnrollmentGetDTO Get(int EnrollmentID)
         {
-            var result = _enrollment.GetById(ID);
+            var result = _enrollment.GetById(EnrollmentID);
             var enrollmentGetDto = _mapper.Map<EnrollmentGetDTO>(result);
             return enrollmentGetDto;
         }
@@ -82,17 +83,19 @@ namespace TugasBootcampNET.Controllers
         }
 
         [HttpDelete("{EnrollmentID}")] //Delete
-        public IActionResult Delete(int ID)
+        public IActionResult Delete(int EnrollmentID)
         {
             try
             {
-                _enrollment.Delete(ID);
-                return Ok($"Delete enrollment id {ID} berhasil");
+                _enrollment.Delete(EnrollmentID);
+                return Ok($"Delete enrollment id {EnrollmentID} berhasil");
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
+
     }
 }

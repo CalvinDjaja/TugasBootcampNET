@@ -10,5 +10,7 @@ namespace TugasBootcampNET.DAL
         public void Delete(int id);//Delete
         public IEnumerable<Student> GetByName(string text); //getbyname
         public Student GetById(int id); //getbyid
+        public IEnumerable<Student> AllStudentWithChosenCourse(int CourseID);
+        public IEnumerable<Student> AllStudentWithCourse();
     }
 }

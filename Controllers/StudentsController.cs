@@ -95,5 +95,21 @@ namespace TugasBootcampNET.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("ListStudent/{CourseID}")] //Studen With Chosen Course
+        public IEnumerable<StudentGetDTO> AllStudentWithChosenCourse(int CourseID)
+        {
+            var results = _student.AllStudentWithChosenCourse(CourseID);
+            var listStudentGetDTO = _mapper.Map<IEnumerable<StudentGetDTO>>(results);
+            return listStudentGetDTO;
+        }
+
+        [HttpGet("ListStudent")] //Studen With Course
+        public IEnumerable<StudentWithCourseGetDTO> AllStudentWithCourse()
+        {
+            var results = _student.AllStudentWithCourse();
+            var listStudentGetDTO = _mapper.Map<IEnumerable<StudentWithCourseGetDTO>>(results);
+            return listStudentGetDTO;
+        }
     }
 }
