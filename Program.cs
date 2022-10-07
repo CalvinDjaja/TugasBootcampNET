@@ -32,6 +32,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 builder.Services.AddScoped<ICourse, CourseEF>();
 builder.Services.AddScoped<IStudent, StudentEF>();
 builder.Services.AddScoped<IEnrollment, EnrollmentEF>();
+builder.Services.AddScoped<IUser, UserEF>();
 
 var app = builder.Build();
 
