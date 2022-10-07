@@ -48,9 +48,17 @@ namespace TugasBootcampNET.DAL
             return userWithToken;
         }
 
-        public Task<IEnumerable<UserGetDTO>> GetAll()
+        public IEnumerable<UserGetDTO> GetAll()
         {
-            throw new NotImplementedException();
+            var users = new List<UserGetDTO>();
+            foreach (var user in _userManager.Users)
+            {
+                users.Add(new UserGetDTO
+                {
+                    Username = user.UserName
+                });
+            }
+            return users;
         }
 
         public async Task Registration(AddUserDTO addUserDTO)
