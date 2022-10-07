@@ -28,6 +28,14 @@ namespace TugasBootcampNET.Controllers
             return lstStudentGetDto;
         }
 
+        [HttpGet("AllStudentPage")] //Read
+        public IEnumerable<StudentGetDTO> GetAllWithPage([FromQuery] PageParameters pageParameters)
+        {
+            var results = _student.GetAllWithPage(pageParameters);
+            var lstStudentGetDto = _mapper.Map<IEnumerable<StudentGetDTO>>(results);
+            return lstStudentGetDto;
+        }
+
         [HttpGet("{ID}")] //GetById
         public StudentGetDTO Get(int ID)
         {

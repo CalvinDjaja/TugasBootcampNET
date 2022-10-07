@@ -13,5 +13,8 @@ namespace TugasBootcampNET.DAL
         public IEnumerable<Student> AllStudentWithChosenCourse(int CourseID);
         public IEnumerable<Student> AllStudentWithCourse();
         public Student InsertWithCourse(Student student, int course); //Create
+
+        public IEnumerable<Student> GetAllWithPage(PageParameters pageParameters); //Read
+        
     }
 }

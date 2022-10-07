@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TugasBootcampNET.Models;
 
 namespace TugasBootcampNET.DAL
@@ -43,6 +44,15 @@ namespace TugasBootcampNET.DAL
         public IEnumerable<Student> GetAll()
         {
             var students = _context.Students.OrderBy(s => s.LastName).ToList();
+            return students;
+        }
+
+        public IEnumerable<Student> GetAllWithPage(PageParameters pageParameters)
+        {
+            var students = _context.Students.OrderBy(s => s.LastName)
+                .Skip((pageParameters.PageNumber - 1) * pageParameters.PageSize)
+                .Take(pageParameters.PageSize)
+                .ToList();
             return students;
         }
 
