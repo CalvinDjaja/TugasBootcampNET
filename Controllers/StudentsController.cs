@@ -111,5 +111,21 @@ namespace TugasBootcampNET.Controllers
             var listStudentGetDTO = _mapper.Map<IEnumerable<StudentWithCourseGetDTO>>(results);
             return listStudentGetDTO;
         }
+
+        [HttpPost("WithCourse")] //Create
+        public IActionResult PostWithCourse(StudentAddDTO studentAddDTO, int courseID)
+        {
+            try
+            {
+                var student = _mapper.Map<Student>(studentAddDTO);
+                var newStudent = _student.InsertWithCourse(student, courseID);
+                var studentGetDTO = _mapper.Map<StudentGetDTO>(newStudent);
+                return CreatedAtAction("Get", new { id = studentGetDTO.ID }, studentGetDTO);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

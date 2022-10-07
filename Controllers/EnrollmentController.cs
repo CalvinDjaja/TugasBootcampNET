@@ -96,6 +96,46 @@ namespace TugasBootcampNET.Controllers
             }
         }
 
+        [HttpPost("InsertStudentToCourse")]
+        public IActionResult AddStudentToCourse(AddStudentToCourseDTO addStudentToCourseDTO)
+        {
+            try
+            {
+                _enrollment.AddStudentToCourse(addStudentToCourseDTO.studentID, addStudentToCourseDTO.courseID);
+                return Ok($"Student id {addStudentToCourseDTO.studentID} berhasil ditambahkan ke course {addStudentToCourseDTO.courseID}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
+        [HttpPost("DeleteStudentFromCourse/{studentID}")]
+        public IActionResult DeleteStudentFromCourse(int studentID, int courseID)
+        {
+            try
+            {
+                _enrollment.DeleteStudentFromCourse(studentID, courseID);
+                return Ok($"Student id {studentID} berhasil dihilangkan dari course {courseID}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("DeleteAllStudentFromCourse/{courseID}")]
+        public IActionResult DeleteAllStudentFromCourse(int courseID)
+        {
+            try
+            {
+                _enrollment.DeleteAllStudentFromCourse(courseID);
+                return Ok($"Semua Student berhasil dihilangkan dari course {courseID}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

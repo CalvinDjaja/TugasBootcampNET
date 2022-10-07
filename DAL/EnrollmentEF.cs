@@ -1,4 +1,5 @@
-﻿using TugasBootcampNET.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TugasBootcampNET.Models;
 
 namespace TugasBootcampNET.DAL
 {
@@ -11,6 +12,27 @@ namespace TugasBootcampNET.DAL
             _context = context;
         }
 
+        public void AddStudentToCourse(int studentID, int courseID)
+        {
+            try
+            {
+                var student = _context.Students.FirstOrDefault(s => s.ID == studentID);
+                var course = _context.Courses.FirstOrDefault(c => c.CourseID == courseID);
+                if (student != null && course != null)
+                {
+                    var enrollment = new Enrollment();
+                    enrollment.CourseID = courseID;
+                    enrollment.StudentID = student.ID;
+                    _context.Enrollments.Add(enrollment);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Delete(int id)
         {
             try
@@ -18,6 +40,52 @@ namespace TugasBootcampNET.DAL
                 var enrollments = GetById(id);
                 _context.Enrollments.Remove(enrollments);
                 _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void DeleteAllStudentFromCourse(int courseID)
+        {
+            try
+            {
+                var course = _context.Courses.FirstOrDefault(c => c.CourseID == courseID);
+                if (course != null)
+                {
+                    var enrollment = _context.Enrollments.Where(e => e.CourseID == courseID).ToList();
+                    if (enrollment != null)
+                    {
+                        foreach(var a in enrollment)
+                        {
+                            _context.Enrollments.Remove(a);
+                            _context.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void DeleteStudentFromCourse(int studentID, int courseID)
+        {
+            try
+            {
+                var student = _context.Students.FirstOrDefault(s => s.ID == studentID);
+                var course = _context.Courses.FirstOrDefault(c => c.CourseID == courseID);
+                if (student != null && course != null)
+                {
+                    var enrollment = _context.Enrollments.Where(e => e.StudentID == studentID && e.CourseID == courseID).FirstOrDefault();
+                    if (enrollment != null)
+                    {
+                        _context.Enrollments.Remove(enrollment);
+                        _context.SaveChanges();
+                    }
+                }
             }
             catch (Exception ex)
             {

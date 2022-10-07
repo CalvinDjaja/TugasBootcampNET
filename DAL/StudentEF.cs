@@ -72,12 +72,37 @@ namespace TugasBootcampNET.DAL
             }
         }
 
+        public Student InsertWithCourse(Student student, int courseID)
+        {
+            var course = _context.Courses.FirstOrDefault(c => c.CourseID == courseID);
+            if (course == null)
+            {
+                throw new Exception($"Data course id {courseID} tidak ditemukan");
+            }
+            try
+            {
+                Enrollment enrollment = new Enrollment();
+                enrollment.CourseID = courseID;
+                enrollment.StudentID = student.ID;
+                _context.Students.Add(student);
+                _context.SaveChanges();
+                _context.Enrollments.Add(enrollment);
+                _context.SaveChanges();
+                return student;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public Student Update(Student student)
         {
             try
             {
                 var students = GetById(student.ID);
-                students.FirstMidName = student.FirstMidName;
+                students.FirstMidName = student.FirstMidName;   
                 students.LastName = student.LastName;
                 students.EnrollmentDate = student.EnrollmentDate;
                 _context.SaveChanges();
