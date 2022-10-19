@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TugasBootcampNET.Migrations
 {
-    public partial class InitialModel : Migration
+    public partial class InitialCode : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,7 +45,7 @@ namespace TugasBootcampNET.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseID = table.Column<int>(type: "int", nullable: false),
                     StudentID = table.Column<int>(type: "int", nullable: false),
-                    Grade = table.Column<int>(type: "int", nullable: true)
+                    Grade = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

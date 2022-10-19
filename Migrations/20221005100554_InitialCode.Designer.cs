@@ -12,8 +12,8 @@ using TugasBootcampNET.DAL;
 namespace TugasBootcampNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221004110323_InitialModel")]
-    partial class InitialModel
+    [Migration("20221005100554_InitialCode")]
+    partial class InitialCode
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,8 +52,8 @@ namespace TugasBootcampNET.Migrations
                     b.Property<int>("CourseID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Grade")
-                        .HasColumnType("int");
+                    b.Property<string>("Grade")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StudentID")
                         .HasColumnType("int");
