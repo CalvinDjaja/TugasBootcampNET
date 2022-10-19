@@ -91,11 +91,11 @@ namespace TugasBootcampNET.DAL
             }
             try
             {
+                _context.Students.Add(student);
+                _context.SaveChanges();
                 Enrollment enrollment = new Enrollment();
                 enrollment.CourseID = courseID;
                 enrollment.StudentID = student.ID;
-                _context.Students.Add(student);
-                _context.SaveChanges();
                 _context.Enrollments.Add(enrollment);
                 _context.SaveChanges();
                 return student;
@@ -112,7 +112,7 @@ namespace TugasBootcampNET.DAL
             try
             {
                 var students = GetById(student.ID);
-                students.FirstMidName = student.FirstMidName;   
+                students.FirstMidName = student.FirstMidName;
                 students.LastName = student.LastName;
                 students.EnrollmentDate = student.EnrollmentDate;
                 _context.SaveChanges();

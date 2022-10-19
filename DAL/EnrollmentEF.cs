@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Eventing.Reader;
 using TugasBootcampNET.Models;
 
 namespace TugasBootcampNET.DAL
@@ -57,7 +58,7 @@ namespace TugasBootcampNET.DAL
                     var enrollment = _context.Enrollments.Where(e => e.CourseID == courseID).ToList();
                     if (enrollment != null)
                     {
-                        foreach(var a in enrollment)
+                        foreach (var a in enrollment)
                         {
                             _context.Enrollments.Remove(a);
                             _context.SaveChanges();
@@ -105,9 +106,9 @@ namespace TugasBootcampNET.DAL
             return enrollments;
         }
 
-        public IEnumerable<Enrollment> GetByName(string text)
+        public IEnumerable<Enrollment> GetByName(int grade)
         {
-            var enrollments = _context.Enrollments.Where(s => s.Grade.ToString().Contains(text)).ToList();
+            var enrollments = _context.Enrollments.Where(s => s.Grade == (Grade)grade).ToList();
             return enrollments;
         }
 

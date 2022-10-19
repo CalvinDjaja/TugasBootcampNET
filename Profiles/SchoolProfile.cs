@@ -16,6 +16,5 @@ namespace TugasBootcampNET.Profiles
             CreateMap<Enrollment, EnrollmentGetDTO>();
             CreateMap<Student, StudentWithCourseGetDTO>();
         }
-
     }
 }

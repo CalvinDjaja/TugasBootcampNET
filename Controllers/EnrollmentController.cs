@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using TugasBootcampNET.Models;
 
 namespace TugasBootcampNET.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EnrollmentController : ControllerBase
@@ -37,10 +39,10 @@ namespace TugasBootcampNET.Controllers
             return enrollmentGetDto;
         }
 
-        [HttpGet("LastName")] //GetByName
-        public IEnumerable<EnrollmentGetDTO> GetByName(string LastName)
+        [HttpGet("Grade")] //GetByName
+        public IEnumerable<EnrollmentGetDTO> GetByName(int Grade)
         {
-            var results = _enrollment.GetByName(LastName);
+            var results = _enrollment.GetByName(Grade);
             var listenrollmentGetDTO = _mapper.Map<IEnumerable<EnrollmentGetDTO>>(results);
             return listenrollmentGetDTO;
         }
@@ -61,14 +63,14 @@ namespace TugasBootcampNET.Controllers
             }
         }
 
-        [HttpPut] //Update
-        public IActionResult Put(int id, EnrollmentAddDTO enrollmentAddDTO)
+        [HttpPut("{EnrollmentID}")] //Update
+        public IActionResult Put(int EnrollmentID, EnrollmentAddDTO enrollmentAddDTO)
         {
             try
             {
                 var enrollment = new Enrollment
                 {
-                    EnrollmentID = id,
+                    EnrollmentID = EnrollmentID,
                     CourseID = enrollmentAddDTO.CourseID,
                     StudentID = enrollmentAddDTO.StudentID
                 };
@@ -110,7 +112,7 @@ namespace TugasBootcampNET.Controllers
             }
         }
 
-        [HttpPost("DeleteStudentFromCourse/{studentID}")]
+        [HttpPost("DeleteStudentFromCourse")]
         public IActionResult DeleteStudentFromCourse(int studentID, int courseID)
         {
             try

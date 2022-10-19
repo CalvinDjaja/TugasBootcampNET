@@ -34,7 +34,7 @@ namespace TugasBootcampNET.DAL
         }
 
         public IEnumerable<Course> GetAll()
-        {   
+        {
             var course = _context.Courses.OrderBy(c => c.Title).ToList();
             return course;
         }

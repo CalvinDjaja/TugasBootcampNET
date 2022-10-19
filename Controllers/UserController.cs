@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TugasBootcampNET.DAL;
 using TugasBootcampNET.DTO;
@@ -29,6 +30,8 @@ namespace TugasBootcampNET.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPost("Login")]
         public async Task<IActionResult> Authenticate(AddUserDTO addUserDTO)
         {
             try

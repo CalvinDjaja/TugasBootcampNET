@@ -79,7 +79,7 @@ namespace TugasBootcampNET.DAL
                         sb.Append($"{item.Code}:{item.Description}\n");
                     };
                     throw new Exception(sb.ToString());
-                }   
+                }
             }
             catch (Exception ex)
             {

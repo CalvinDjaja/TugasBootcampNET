@@ -11,5 +11,5 @@ namespace TugasBootcampNET.DAL
         public IEnumerable<Course> GetByName(string text); //getbyname
         public Course GetById(int id); //getbyid
         public IEnumerable<Course> AllCourseWithChosenStudent(int StudentID);
-    }   
+    }
 }

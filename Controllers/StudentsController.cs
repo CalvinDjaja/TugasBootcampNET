@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TugasBootcampNET.DAL;
@@ -7,6 +8,7 @@ using TugasBootcampNET.Models;
 
 namespace TugasBootcampNET.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentsController : ControllerBase
@@ -68,14 +70,14 @@ namespace TugasBootcampNET.Controllers
             }
         }
 
-        [HttpPut] //Update
-        public IActionResult Put(int id, StudentAddDTO studentAddDTO)
+        [HttpPut("{ID}")] //Update
+        public IActionResult Put(int ID, StudentAddDTO studentAddDTO)
         {
             try
             {
                 var student = new Student
                 {
-                    ID = id,
+                    ID = ID,
                     LastName = studentAddDTO.LastName,
                     FirstMidName = studentAddDTO.FirstMidName,
                     EnrollmentDate = studentAddDTO.EnrollmentDate
@@ -120,7 +122,7 @@ namespace TugasBootcampNET.Controllers
             return listStudentGetDTO;
         }
 
-        [HttpPost("WithCourse")] //Create
+        [HttpPost("WithCourse/{courseID}")] //Create
         public IActionResult PostWithCourse(StudentAddDTO studentAddDTO, int courseID)
         {
             try

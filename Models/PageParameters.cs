@@ -10,10 +10,7 @@
             {
                 return _pageSize;
             }
-            set
-            {
-
-            }
+            set{}
         }
     }
 }
